@@ -147,11 +147,19 @@ void process_args(int argc, char **argv, char **envp)
 
 		case 'L':	/* number of iterations */
 			loop_count = atoi(optarg);
+			if (loop_count < 1) {
+				fprintf(stderr, "Number of loops must be at least 1\n");
+				usage();
+			}
 			keep_files = 1;			/* Set keep files as well */
 			break;
 
 		case 'n':	/* Set number of files to test of each size */
 			num_files = atoi(optarg);
+			if (num_files < 1) {
+				fprintf(stderr, "Must create at least one file per iteration");
+				usage();
+			}
 			if (num_files > MAX_FILES) {
 				fprintf(stderr, "Max files is %d\n", MAX_FILES);
 				usage();
@@ -218,6 +226,10 @@ void process_args(int argc, char **argv, char **envp)
 
 		case 't':	/* Set number of threads */
 			num_threads = atoi(optarg);
+			if (num_threads < 1) {
+				fprintf(stderr, "Must create at least one thread\n");
+				usage();
+			}
 			if (num_threads > MAX_THREADS) {
 				fprintf(stderr, "Max threads is %d\n",
 					MAX_THREADS);
