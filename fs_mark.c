@@ -210,8 +210,8 @@ void process_args(int argc, char **argv, char **envp)
 				break;
 
 			default:
-				fprintf(stderr, "Max filename size is %d\n",
-					FILENAME_SIZE);
+				fprintf(stderr, "Unknown sync method: %d\n",
+					sync_method_type);
 				usage();
 			}
 			break;
