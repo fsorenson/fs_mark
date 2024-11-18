@@ -173,6 +173,10 @@ void process_args(int argc, char **argv, char **envp)
 
 		case 'p':	/* Set size of names in directories */
 			name_len = atoi(optarg);
+			if (name_len < 1) {
+				fprintf(stderr, "Cannot create filenames of %d byte length\n", name_len);
+				usage();
+			}
 			if (name_len > FILENAME_SIZE) {
 				fprintf(stderr, "Max filename size is %d\n",
 					FILENAME_SIZE);
