@@ -174,6 +174,10 @@ void process_args(int argc, char **argv, char **envp)
 
 		case 's':	/* Set specific size to test */
 			file_size = atoi(optarg);
+			if (file_size < 0) {
+				fprintf(stderr, "Cannot create files of negative size\n");
+				usage();
+			}
 			break;
 
 		case 'r':	/* Use random file names */
@@ -223,6 +227,10 @@ void process_args(int argc, char **argv, char **envp)
 
 		case 'w':	/* Set write buffer size */
 			io_buffer_size = atoi(optarg);
+			if (io_buffer_size < 0) {
+				fprintf(stderr, "Cannot specify negative buffer size\n");
+				usage();
+			}
 			if (io_buffer_size > MAX_IO_BUFFER_SIZE) {
 				fprintf(stderr, "MAX IO buffer size is %d\n",
 					MAX_IO_BUFFER_SIZE);
@@ -703,8 +711,9 @@ void do_run(pid_t my_pid)
 		 * In avg_write_usec, we acculumate the average of the average write times.
 		 * In total_write_usec, we track the total time spent in write().
 		 */
-		write_file(fd, file_size, &avg_write_usec, &total_write_usec,
-			   &min_write_usec, &max_write_usec);
+		if (file_size > 0 && io_buffer_size > 0)
+			write_file(fd, file_size, &avg_write_usec, &total_write_usec,
+				   &min_write_usec, &max_write_usec);
 
 		/*
 		 * Time the fsync() operation.
