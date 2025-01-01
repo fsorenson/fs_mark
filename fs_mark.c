@@ -61,7 +61,7 @@ void cleanup_exit(void)
 void usage(void)
 {
 	fprintf(stderr,
-		"Usage: fs_mark\n%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s",
+		"Usage: fs_mark\n%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s",
 		"\t-h <print usage and exit>\n",
 		"\t-k <keep files after each iteration>\n",
 		"\t-F <run until FS full>\n",
@@ -70,7 +70,7 @@ void usage(void)
 		"4:syncPostReverseFsync, 5:PostFsync, 6:syncPostFsync)\n",
 		"\t[-D number (of subdirectories)]\n",
 		"\t[-N number (of files in each subdirectory in Round Robin mode)]\n",
-		"\t[-d dir1 ... -d dirN]\n", "\t[-l log_file_name]\n",
+		"\t[-d dir1 ... -d dirN]\n",
 		"\t[-l log_file_name]\n",
 		"\t[-L number (of iterations)]\n",
 		"\t[-n number (of files per iteration)]\n",
